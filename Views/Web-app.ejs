@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-app</title>
+    <link rel="stylesheet" href="/Styles/Webbstyles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                
+                <div class="header_Title">
+                    <div class="main_title">My DataBase <sub><small>Based on JS</small></sub></div>
+
+                    <div class="text_container">
+                        <div class="link_text"><a href="/" class="custom-link">Главная</a></div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </header>
+
+        <div class="work-area">
+            <div class="work-left">
+                <div class="sidebar" id="sidebar">
+                    <div class="toggle-btn" id="toggleBtn">
+                        <span id="arrow">❯</span>
+                    </div>
+                    <div class="menu">
+                        <!-- Your menu items go here -->
+                         <hr>
+                        <button class="btn" id="ShowShops"  title="Показывает таблицу с магазинами">Магазины</button>
+                        <button class="btn" id="ShowSupps" title="Показыват таблицу с поставщиками">Поставщики</button>
+                        <button class="btn" id="ShowShips" title="Показывает таблицу с поставками">Поставки</button>
+                        <button class="btn" id="ShowProds" title="Показывает таблицу с продуктами">Продукты</button>
+                        <button class="btn" id="ShowForm" title="Показывает объединённую со всеми таблицу">Итоговая форма</button>
+                        <hr>
+                        <button class="btn" id="add-record-button" title="Показывает форму добавления записи, убедитесь что связи удалены">Добавить запись?</button>
+                        <button class="delete-btn" id="delete-record-button" title="Удаляет запись, вводите аккуратно">Удалить запись?</button>
+                        <hr>
+                        <button class="btn" id="add-relations-button" title="Добавляет связи, после этого нельзя добавить запись, нужно для показа итоговой формы">Добавить связи</button>
+                        <button class="delete-btn" id="remove-relations-button" title="Удаление связей, нужно для добавления записи">Удалить связи</button>
+                        <hr>
+                    </div>
+                
+                </div>
+                <div class="sidebar" id="sidebar2">
+                    <div class="toggle-btn" id="toggleBtn2">
+                        <span id="arrow2">❯</span>
+                    </div>
+                    <div class="menu">
+                        <!-- Your menu items go here -->
+                        <hr>
+                        <button class="loading-btn" id="loadShops" title="Позволяет скачать таблицу с магазинами в формате .xslx, для первого скачивания убедитесь, что таблица на экране">Магазины</button>
+                        <button class="loading-btn" id="loadSupps" title="Позволяет скачать таблицу с поставщиками в формате .xslx, для первого скачивания убедитесь, что таблица на экране">Поставщики</button>
+                        <button class="loading-btn" id="loadShips" title="Позволяет скачать таблицу с поставками в формате .xslx, для первого скачивания убедитесь, что таблица на экране">Поставки</button>
+                        <button class="loading-btn" id="loadProds" title="Позволяет скачать таблицу с продуктами в формате .xslx, для первого скачивания убедитесь, что таблица на экране">Продукты</button>
+                        <button class="loading-btn" id="loadForm" title="Позволяет скачать таблицу с формой в формате .xslx, для первого скачивания убедитесь, что таблица на экране">Итоговая форма</button>
+                        <hr>
+                    </div>
+                
+                </div>  
+            </div>
+            
+
+            <div class="work-center">    
+                <table id="table1" style="display: none;" border="1">
+                    <thead>
+                        <tr>
+                            <!-- Заголовки столбцов будут вставлены здесь -->
+                            <th>Код магазина</th>
+                            <th>Город</th>
+                            <th>Адрес</th>
+                            <th>Название</th>
+                            <th>Контакты</th>
+                            <th>код Поставщика</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- Данные будут вставлены здесь -->
+                    </tbody>
+                </table>
+                <table id="table2" style="display: none;" border="1">
+                    <thead>
+                        <tr >
+                            <!-- Заголовки столбцов будут вставлены здесь -->
+                            <th>Код поставщика</th>
+                            <th>Город</th>
+                            <th>Название</th>
+                            <th>Контакты</th>
+                            <th>Код поставки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- Данные будут вставлены здесь -->
+                    </tbody>
+                </table>
+                <table id="table3" style="display: none;" border="1">
+                    <thead>
+                        <tr>
+                            <!-- Заголовки столбцов будут вставлены здесь -->
+                            <th>Код поставки</th>
+                            <th>Вес<sub><small>тонны</small></sub></th>
+                            <th>Количество едениц продукции</th>
+                            <th>Дата</th>
+                            <th>Код продукта</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- Данные будут вставлены здесь -->
+                    </tbody>
+                </table>
+                <table id="table4" style="display: none;" border="1">
+                    <thead>
+                        <tr>
+                            <!-- Заголовки столбцов будут вставлены здесь -->
+                            <th>Код продутка</th>
+                            <th>Цена <sub><small>шт</small></sub></th>
+                            <th>Название</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- Данные будут вставлены здесь -->
+                    </tbody>
+                </table>
+                <table id="table5" style="display: none;" border="1">
+                    <thead>
+                        <tr>
+                            <!-- Заголовки столбцов будут вставлены здесь -->
+                            <th>Код магазина</th>
+                            <th>Название магазина</th>
+                            <th>Название поставщика</th>
+                            <th>Вес<sub><small>тонны</small></sub></th>
+                            <th>Количество едениц продукции</th>
+                            <th>дата</th>
+                            <th>Название продукта</th>
+                            <th>Цена продукта <sub><small>шт</small></sub></th>
+                            <th>Город выгрузки</th>
+                            <th>Город загрузки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <!-- Данные будут вставлены здесь -->
+                    </tbody>
+                </table>
+                <button class="Close-btn" style="display: none;" id="CloseBtn">Закрыть</button>
+                <button class="show-calc" style="display: none;" id="showCalculatorButton" >Рассчитать стоимость?</button>
+               
+
+                <script src="/JS-client/Webhandler.js"></script>
+            </div>
+            <div class="work-right">
+                <div id="dropdown-menu">
+                    <p>Выберите таблицу:</p>
+                    <button class="btn" id="Shop-button">Магазины</button>
+                    <button class="btn" id="Supplier-button">Поставщики</button>
+                    <button class="btn" id="shipment-button">Поставки</button>
+                    <button class="btn" id="product-button">Продукты</button>
+                    <button class="btn" id="close-menu-button">Закрыть меню</button>
+                    <div id="record-fields"></div>
+                </div>
+
+                <div class="calculator" id="calculator" style="display: none;">
+                    <h3>Калькулятор стоимости грузовых перевозок<sub><small>налог 10% включен в расчеты</small></sub></h3>
+                    <form id="shippingForm">
+                        <label for="distance">Расстояние (км):</label>
+                        <input type="number" id="distance" required>
+            
+                        <label for="weight">Вес груза (тонны):</label>
+                        <input type="number" id="weight" required>
+            
+                        <label for="volume">Количество едениц перевозимого груза:</label>
+                        <input type="number" id="volume" required>
+            
+                        <label for="unitCost">Стоимость одной единицы груза (руб.):</label>
+                        <input type="number" id="unitCost" required>
+            
+                        <label for="additionalServices">
+                            <input type="checkbox" id="additionalServices" title="Погрузка/выгрузка груза">
+                            Дополнительные услуги (30000 руб.)
+                        </label>
+                        
+                        <button class="calc-btn" type="button" onclick="calculateCost()">Рассчитать стоимость</button>
+                    </form>
+                    <div id="result"></div>
+                </div>
+            </div>
+
+            
+                
+                    
+        </div>
+    </div>
+</body>
+</html>

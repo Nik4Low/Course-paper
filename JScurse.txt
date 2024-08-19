@@ -1,0 +1,220 @@
+//Копировать в новый Node проект!!!
+
+
+const http = require('http');
+const fs = require('fs');
+const express = require('express');
+const mysql = require('mysql2');
+const bodyParser =require('body-parser');
+
+
+const app = express();
+const PORT = 5252;
+const HOST = '127.0.0.1';
+
+
+const connection = mysql.createConnection({
+    host: 'mysql-5.7',
+    user: 'root',
+    password: '',
+    database: 'BDlab',
+    port: 3306
+})
+connection.connect((err) => {
+    if (err) {
+        console.error('Ошибка подключения к базе данных: ', err.stack);
+        return;
+    }
+    console.log('Успешно подключено к базе данных с ID ', connection.threadId);
+});
+
+module.exports = connection;
+
+app.set('view engine', 'ejs');
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('Static'));
+
+app.get('/get-SHOP', (req, res) => {
+    const query = `SELECT * FROM Shop ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-SUPP', (req, res) => {
+    const query = `SELECT * FROM Supplier ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-SHIP', (req, res) => {
+    const query = `SELECT * FROM shipment ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-PROD', (req, res) => {
+    const query = `SELECT * FROM product ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-FORM', (req, res) => {
+    const query = `SELECT * FROM Form ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+
+app.get('/', (req, res) => {
+    res.render('My_DataBaseJS')
+
+})
+app.get('/about', (req, res) => {
+    res.render('about')
+
+})
+app.get('/Web-app', (req, res) => {
+    res.render('Web-app')
+
+})
+app.get('/aboutSQL', (req, res) => {
+    res.render('aboutSQL')
+
+})
+app.get('/aboutNode', (req, res) => {
+    res.render('aboutNode')
+
+})
+app.get('/user/:name/:id', (req, res) => {
+    res.send(`ID: ${req.params.id}. Username: ${req.params.name}`)
+
+})
+
+app.listen(PORT, HOST, () => {
+    console.log(`Сервер запущен: http://${HOST}:${PORT}`)
+})const http = require('http');
+const fs = require('fs');
+const express = require('express');
+const mysql = require('mysql2');
+const bodyParser =require('body-parser');
+
+
+const app = express();
+const PORT = 5252;
+const HOST = '127.0.0.1';
+
+
+const connection = mysql.createConnection({
+    host: 'mysql-5.7',
+    user: 'root',
+    password: '',
+    database: 'BDlab',
+    port: 3306
+})
+connection.connect((err) => {
+    if (err) {
+        console.error('Ошибка подключения к базе данных: ', err.stack);
+        return;
+    }
+    console.log('Успешно подключено к базе данных с ID ', connection.threadId);
+});
+
+module.exports = connection;
+
+app.set('view engine', 'ejs');
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('Static'));
+
+app.get('/get-SHOP', (req, res) => {
+    const query = `SELECT * FROM Shop ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-SUPP', (req, res) => {
+    const query = `SELECT * FROM Supplier ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-SHIP', (req, res) => {
+    const query = `SELECT * FROM shipment ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-PROD', (req, res) => {
+    const query = `SELECT * FROM product ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+app.get('/get-FORM', (req, res) => {
+    const query = `SELECT * FROM Form ` ;
+    connection.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).send('Ошибка при выполнении запроса');
+        }
+        res.json(results);
+    });
+});
+
+app.get('/', (req, res) => {
+    res.render('My_DataBaseJS')
+
+})
+app.get('/about', (req, res) => {
+    res.render('about')
+
+})
+app.get('/Web-app', (req, res) => {
+    res.render('Web-app')
+
+})
+app.get('/aboutSQL', (req, res) => {
+    res.render('aboutSQL')
+
+})
+app.get('/aboutNode', (req, res) => {
+    res.render('aboutNode')
+
+})
+app.get('/user/:name/:id', (req, res) => {
+    res.send(`ID: ${req.params.id}. Username: ${req.params.name}`)
+
+})
+
+app.listen(PORT, HOST, () => {
+    console.log(`Сервер запущен: http://${HOST}:${PORT}`)
+})
